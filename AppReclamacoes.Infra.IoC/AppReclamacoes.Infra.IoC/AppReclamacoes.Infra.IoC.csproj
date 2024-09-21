@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AppReclamacoes.Domain\AppReclamacoes.Domain\AppReclamacoes.Domain.csproj" />
+    <ProjectReference Include="..\..\AppReclamacoes.Application\AppReclamacoes.Application\AppReclamacoes.Application.csproj" />
+    <ProjectReference Include="..\..\AppReclamacoes.Infra.Data\AppReclamacoes.Infra.Data\AppReclamacoes.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

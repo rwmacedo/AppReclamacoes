@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppReclamacoes.Infra.Data", "AppReclamacoes.Infra.Data\AppReclamacoes.Infra.Data.csproj", "{3FA88849-095A-4B96-9D1C-DE2A5ACE0DBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FA88849-095A-4B96-9D1C-DE2A5ACE0DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FA88849-095A-4B96-9D1C-DE2A5ACE0DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA88849-095A-4B96-9D1C-DE2A5ACE0DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FA88849-095A-4B96-9D1C-DE2A5ACE0DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34E0DA03-ECAA-4929-BF3B-5C81C0719ECA}
+	EndGlobalSection
+EndGlobal
