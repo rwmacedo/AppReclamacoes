@@ -1,7 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+  <ItemGroup>  
+    <ProjectReference Include="..\..\AppReclamacoes.Application\AppReclamacoes.Application\AppReclamacoes.Application.csproj" />
+      <ProjectReference Include="..\..\AppReclamacoes.Infra.IoC\AppReclamacoes.Infra.IoC\AppReclamacoes.Infra.IoC.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\AppReclamacoes.Infra.Ioc\AppReclamacoes.Infra.IoC\AppReclamacoes.Infra.IoC.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

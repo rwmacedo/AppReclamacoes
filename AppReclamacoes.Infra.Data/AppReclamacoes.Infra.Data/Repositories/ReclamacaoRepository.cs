@@ -5,44 +5,54 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CleanArchMvc.Infra.Data.Repositories
+namespace AppReclamacoes.Infra.Data.Repositories
 {
     public class ReclamacaoRepository : IReclamacaoRepository
     {
-        private readonly ApplicationDbContext _reclamacaoContext;
+        private readonly ApplicationDbContext _context;
         public ReclamacaoRepository(ApplicationDbContext context)
         {
-            _reclamacaoContext = context;
+            _context = context;
         }
 
         public async Task<Reclamacao> CreateAsync(Reclamacao reclamacao)
         {
-            _reclamacaoContext.Add(reclamacao);
-            await _reclamacaoContext.SaveChangesAsync();
+            _context.Add(reclamacao);
+            await _context.SaveChangesAsync();
             return reclamacao;
         }
+        public async Task<Reclamacao> GetReclamacaoProdutoAsync(int id)
+{
+    return await _context.Reclamacoes.Include(p => p.Produto)
+                                     .FirstOrDefaultAsync(r => r.Id == id);
+}
+
 
         public async Task<Reclamacao> GetByIdAsync(int? id)
         {
-            return await _reclamacaoContext.Reclamacoes.FindAsync(id);
+            return await _context.Reclamacoes
+                .Include(r => r.Produto) 
+                .FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task<IEnumerable<Reclamacao>> GetReclamacoesAsync()
         {
-            return await _reclamacaoContext.Reclamacoes.ToListAsync();
+            return await _context.Reclamacoes
+                .Include(r => r.Produto) 
+                .ToListAsync();
         }
 
         public async Task<Reclamacao> RemoveAsync(Reclamacao reclamacao)
         {
-            _reclamacaoContext.Remove(reclamacao);
-            await _reclamacaoContext.SaveChangesAsync();
+            _context.Remove(reclamacao);
+            await _context.SaveChangesAsync();
             return reclamacao;
         }
 
         public async Task<Reclamacao> UpdateAsync(Reclamacao reclamacao)
         {
-            _reclamacaoContext.Update(reclamacao);
-            await _reclamacaoContext.SaveChangesAsync();
+            _context.Update(reclamacao);
+            await _context.SaveChangesAsync();
             return reclamacao;
         }
     }

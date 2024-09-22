@@ -1,4 +1,5 @@
 using System;
+using AppReclamacoes.Domain;
 
 namespace AppReclamacoes.Domain.Validation
 {
@@ -6,7 +7,6 @@ namespace AppReclamacoes.Domain.Validation
     {
         public DomainExceptionValidation(string error) : base(error) { }
 
-        // Metodo para verificar e lançar exceção
         public static void When(bool hasError, string error)
         {
             if (hasError)
