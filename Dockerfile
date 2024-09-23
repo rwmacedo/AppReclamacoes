@@ -30,5 +30,5 @@ ENV ASPNETCORE_URLS=http://*:$PORT
 EXPOSE 80
 
 # Comando de entrada para rodar o aplicativo
-ENTRYPOINT ["dotnet", "ProgramaOficios.API.dll"]
+ENTRYPOINT ["dotnet", "AppReclamacoes.API.dll"]
 #CMD ASPNETCORE_URLS="http://*:$PORT" dotnet ProgramaOficios.API.dll
