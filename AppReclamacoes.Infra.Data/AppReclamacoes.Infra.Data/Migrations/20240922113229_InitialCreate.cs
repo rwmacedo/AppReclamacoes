@@ -25,8 +25,8 @@ namespace AppReclamacoes.Infra.Data.Migrations
                     Telefone = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
                     Produto = table.Column<int>(type: "integer", nullable: false),
-                    DataReclamacao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DataOcorrencia = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DataReclamacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DataOcorrencia = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Valor = table.Column<decimal>(type: "numeric(10,2)", precision: 10, scale: 2, nullable: false),
                     Descricao = table.Column<string>(type: "character varying(400)", maxLength: 400, nullable: false)
                 },

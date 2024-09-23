@@ -40,9 +40,11 @@ namespace AppReclamacoes.Application.DTOs
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
+        public int ProdutoId { get; set; } 
+
         [Required(ErrorMessage = "O Produto é obrigatório")]
         [DisplayName("Produto Reclamado")]
-        public string ProdutoNome { get; set; } // Nome do Produto para exibição
+        public string ProdutoNome { get; set; } 
 
         [Required(ErrorMessage = "A Data de Reclamação é obrigatória")]
         [DataType(DataType.Date)]

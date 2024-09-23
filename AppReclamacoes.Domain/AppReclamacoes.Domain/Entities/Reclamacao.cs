@@ -28,8 +28,10 @@ public sealed class Reclamacao
         ProdutoId = produtoId;
         ValidateDomain(tipoPessoa, cpfCnpj, nome, idadeOuTempoConstituicao, telefone, email, dataReclamacao, dataOcorrencia, valor, descricao);
     }
+    // Construtor sem parâmetros
+    public Reclamacao() { }
 
-    // Construtor com ID (para atualizações)
+     // Construtor com ID (para atualizações)
     public Reclamacao(int id, TipoPessoa tipoPessoa, string cpfCnpj, string nome, int idadeOuTempoConstituicao, string telefone, string email,
         int produtoId, DateTime dataReclamacao, DateTime dataOcorrencia, decimal valor, string descricao)
     {
@@ -51,12 +53,18 @@ public sealed class Reclamacao
     private void ValidateDomain(TipoPessoa tipoPessoa, string cpfCnpj, string nome, int idadeOuTempoConstituicao, string telefone, string email,
        DateTime dataReclamacao, DateTime dataOcorrencia, decimal valor, string descricao)
     {
+        // Convertendo as datas para UTC
+        DataReclamacao = dataReclamacao.ToUniversalTime();
+        DataOcorrencia = dataOcorrencia.ToUniversalTime();
+
         // Validações de TipoPessoa
         DomainExceptionValidation.When(tipoPessoa != TipoPessoa.PessoaFisica && tipoPessoa != TipoPessoa.PessoaJuridica, "Tipo de pessoa inválido. Deve ser 1 (Pessoa Física) ou 2 (Pessoa Jurídica).");
 
         // Validações de CpfCnpj
         if (tipoPessoa == TipoPessoa.PessoaFisica)
         {
+
+
             DomainExceptionValidation.When(cpfCnpj.Length != 11, "CPF inválido. Deve conter 11 caracteres.");
         }
         else if (tipoPessoa == TipoPessoa.PessoaJuridica)
