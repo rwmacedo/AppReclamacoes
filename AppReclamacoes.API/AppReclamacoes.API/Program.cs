@@ -19,6 +19,10 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
+var sqlConnectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING") 
+    ?? throw new InvalidOperationException("A string de conexão SQL não foi configurada corretamente.");
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
