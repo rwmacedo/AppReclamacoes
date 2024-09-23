@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Copiar os arquivos de projeto corretos
-COPY ./AppReclamacoes.API/AppReclamacoes.API/AppReclamacoes.API.API.csproj ./AppReclamacoes.API.API/AppReclamacoes.API.API/
+COPY ./AppReclamacoes.API/AppReclamacoes.API/AppReclamacoes.API.csproj ./AppReclamacoes.API/AppReclamacoes.API/
 COPY ./AppReclamacoes.Application/AppReclamacoes.Application/AppReclamacoes.Application.csproj ./AppReclamacoes.Application/AppReclamacoes.Application/
 COPY ./AppReclamacoes.Domain/AppReclamacoes.Domain/AppReclamacoes.Domain.csproj ./AppReclamacoes.Domain/AppReclamacoes.Domain/
 COPY ./AppReclamacoes.Infra.Data/AppReclamacoes.Infra.Data/AppReclamacoes.Infra.Data.csproj ./AppReclamacoes.Infra.Data/AppReclamacoes.Infra.Data/
