@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
-var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
 
 if (string.IsNullOrEmpty(connectionString))
 {
