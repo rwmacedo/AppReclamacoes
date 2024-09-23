@@ -18,7 +18,7 @@ namespace AppReclamacoes.Infra.Data.Context
             {
                 // Caso a variável não exista, usa o appsettings.json
                 var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(),"../../AppReclamacoes.WebUi/AppReclamacoes.WebUi"))
+                    .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(),"../../AppReclamacoes.API/AppReclamacoes.API"))
                     .AddJsonFile("appsettings.json", optional: false)
                     .Build();
 
