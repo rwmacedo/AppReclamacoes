@@ -16,10 +16,10 @@ namespace AppReclamacoes.Infra.Data.Context
 
             if (string.IsNullOrEmpty(connectionString))
             {
-                // Caso a variável não exista, usa o appsettings.json
+                // Caso a variável não exista, usa o appsettings.json para o ambiente local
                 var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(),"../../AppReclamacoes.API/AppReclamacoes.API"))
-                    .AddJsonFile("appsettings.json", optional: false)
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
 
                 connectionString = configuration.GetConnectionString("DefaultConnection");

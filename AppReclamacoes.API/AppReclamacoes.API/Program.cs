@@ -19,9 +19,16 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
-var sqlConnectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING") 
-    ?? throw new InvalidOperationException("A string de conexão SQL não foi configurada corretamente.");
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 
+if (string.IsNullOrEmpty(connectionString))
+{
+    // Usando o appsettings.json para ambiente local
+    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+}
+
+// Certifique-se de que a conexão seja usada no AddInfrastructure
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
