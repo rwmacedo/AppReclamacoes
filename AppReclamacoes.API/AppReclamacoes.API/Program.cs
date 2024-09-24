@@ -1,15 +1,18 @@
+using Microsoft.EntityFrameworkCore;
 using AppReclamacoes.Infra.IoC;
 using AppReclamacoes.Application.Mappings;
+using AppReclamacoes.Infra.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Exibir a string de conexão para depuração
+Console.WriteLine($"SQL_CONNECTION_STRING: {Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING")}");
+
+// Adicionando serviços ao container.
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
-
 
 builder.Services.AddCors(options =>
 {
@@ -19,44 +22,46 @@ builder.Services.AddCors(options =>
                           .AllowAnyHeader());
 });
 
-var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+// Pegando a string de conexão do ambiente
+var connectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING")
+    ?? throw new InvalidOperationException("A string de conexão SQL não foi configurada corretamente.");
 
-if (string.IsNullOrEmpty(connectionString))
-{
-    // Usando o appsettings.json para ambiente local
-    connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-}
+// Certifique-se de passar a string de conexão corretamente para o contexto do EF
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
-// Certifique-se de que a conexão seja usada no AddInfrastructure
+// Adicionando infraestrutura
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+// Aplicando migrações durante a inicialização do aplicativo
+using (var scope = app.Services.CreateScope())
 {
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate(); // Aplica as migrações automaticamente
 }
 
-
+// Configurando o Swagger para documentação da API
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
-    c.RoutePrefix = string.Empty;  
+    c.RoutePrefix = string.Empty;
 });
 
-app.UseCors("AllowAll");
-app.UseHttpsRedirection();
+// Configurar a porta para o Heroku
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://*:{port}");
 
+// Habilitar CORS
+app.UseCors("AllowAll");
+
+// Rotas e middleware padrão
 app.UseRouting();
 app.UseAuthorization();
 
-app.MapControllers();  
-
-app.Run();
-
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",

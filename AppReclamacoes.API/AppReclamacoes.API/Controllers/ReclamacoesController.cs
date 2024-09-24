@@ -3,7 +3,7 @@ using AppReclamacoes.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace AppReclamacoes.WebAPI.Controllers
+namespace AppReclamacoes.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
